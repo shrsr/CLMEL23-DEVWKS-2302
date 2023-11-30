@@ -1,0 +1,33 @@
+==================
+Workshop Directory
+==================
+
+Before you start with the modules, it is important to familiarize yourself with the structure of the working directory. Here is the directory structure for this workshop:
+
+.. code-block:: bash
+
+   workshop/
+   ├── DEVWKS-2302/
+   │   ├── Module1/
+   │   │   └── my_ACI_playbook.yml
+   │   ├── Module2/
+   │   │   ├── ansible_to_TF.yml   
+   │   │   ├── filter_plugins/   
+   │   │   ├── go.mod   
+   │   │   ├── go.sum   
+   │   │   ├── inventory.networking 
+   │   │   └── my_ACI_playbook.yml
+   │   ├── Module3_optional/
+   │   │   └── my_ACI_role/
+   │   └── translator/
+
+
+Each directory corresponds to a different part of the workshop:
+
+* **Module1**: You will utilize the file `my_ACI_playbook.yml`, which will be selected from a drop-down menu within the web application.
+
+* **Module2**: In this module, you'll primarily be working with and modifying the `my_ACI_playbook.yml` and `inventory.networking` files.
+
+* **Module3_optional**: For the optional third module, you'll be selecting the zipped version of the role `my_ACI_role` from a drop-down menu within the application.
+
+* **translator**: This directory contains the necessary files to start the translator application used in the workshop.

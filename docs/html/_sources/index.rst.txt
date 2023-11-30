@@ -14,7 +14,7 @@ An automated Ansible to Terraform translation for ACI
 
    Introduction
    Important_note
-   Workshop_directory
+   Workshop_directory_structure
    Module1
    Module2
    Module3
