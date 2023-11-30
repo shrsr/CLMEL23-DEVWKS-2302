@@ -1,66 +1,227 @@
-============================
-Introduction
-============================
+========
+Module 2
+========
 
 .. contents:: Table of Contents
 
-Introduction
+Outline
+=======
+
+1. In this module, you'll manually translate the same playbook you worked on in Module 1. This step is crucial as it helps you understand the behind-the-scenes processes. Additionally, it allows you to choose your preferred method for future translations: using the translator application or following the manual process.
+
+2. The **Module2** directory contains the following files and directories:
+   
+   .. code-block:: bash
+
+      Module2/
+      ├── ansible_to_TF.yml   
+      ├── filter_plugins/   
+      ├── go.mod   
+      ├── go.sum   
+      ├── inventory.networking 
+      └── my_ACI_playbook.yml   
+
+3. You will be working with and modifying **my_ACI_playbook.yml** and the **inventory.networking**. The remaining files in the directory are necessary for the translation process to be carried out.
+
+Instructions 
 ============
 
-This guide will explain how to upload an Ansible playbook.
+1. Please Close All Terminal Windows from Module 1
+--------------------------------------------------
 
-Requirements
-============
+2. Open and Modify the **inventory.networking** File
+----------------------------------------------------
 
-- Ansible installed
-- Access to the target system
+1. Navigate to the **workshop/DEVWKS-2302/Module2** directory and open the **inventory.networking** file.
+2. Referring to your handout, fill the empty fields in the inventory.networking file. Enter the required information directly after the '=' sign without adding any space. Put the APIC Host (this is the APIC's IP address) for **ansible_host=**, the APIC User ID for **ansible_user=**, and the APIC Password for **ansible_password=**.
+   Example:
+     .. image:: /images/inventory.png
+3. Leave the rest of the fields unchanged. Once you have entered the required information, you can save your changes and close the file.
 
-Uploading the Playbook
-======================
+3. Open and Modify the Playbook **my_ACI_playbook.yml**
+-------------------------------------------------------
 
-1. Create the Ansible Playbook
-------------------------------
+1. In the same directory as before, open the playbook file named **my_ACI_playbook.yml**.
+2. This playbook contains a total of **seven** tasks.
+3. You'll need to modify each task by adding the **register** keyword and assigning a unique value to it. Please note that each task must have a unique value. For convenience, after step 4, you can copy the entire playbook provided below into your **my_ACI_playbook.yml** file. This version of the playbook already has the register keyword added to each task.
+4. Next, append the playbook called **ansible_to_TF.yml** to run after all the other tasks. In our case, this will become the eighth task in the playbook. For convenience, the eight task is already appended below.
 
-First, you need to create your Ansible playbook. Here's a basic example playbook:
+    .. code-block:: yml
 
-.. code-block:: yaml
+      ---
+      - name: my_ACI_playbook
+        hosts: aci
+        gather_facts: no
+        tasks:
+          - name: Create a tenant
+            cisco.aci.aci_tenant: 
+              tenant: ansible_to_tf
+              output_level: debug
+              state: present
+            register: reg1
 
-    ---
-    - hosts: webservers
-      vars:
-        http_port: 80
-        max_clients: 200
-      remote_user: root
-      tasks:
-      - name: ensure apache is at the latest version
-        yum:
-          name: httpd
-          state: latest
-      - name: write the apache config file
-        template:
-          src: /srv/httpd.j2
-          dest: /etc/httpd.conf
-        notify:
-        - restart apache
-      - name: ensure apache is running
-        service:
-          name: httpd
-          state: started
+          - name: Configure a VRF
+            cisco.aci.aci_vrf: 
+              tenant: ansible_to_tf
+              vrf: l3outtest
+              output_level: debug
+              state: present
+            register: reg2
 
-2. Move the Playbook to the Target System
------------------------------------------
+          - name: Create an L3Out
+            cisco.aci.aci_l3out:
+              tenant: ansible_to_tf
+              l3out: l3-dmz-ex-1
+              domain: l3outtest
+              vrf: l3outtest
+              route_control: export
+              output_level: debug 
+              state: present
+            register: reg3
 
-Use the ``scp`` command to copy the playbook to your target system:
+          - name: Create a node profile
+            cisco.aci.aci_l3out_logical_node_profile: 
+              tenant: ansible_to_tf
+              l3out: l3-dmz-ex-1
+              logical_node: np1101
+              output_level: debug
+              state: present
+            register: reg4
 
-.. code-block:: bash
+          - name: Add a node
+            cisco.aci.aci_l3out_logical_node:
+              tenant: ansible_to_tf
+              l3out: l3-dmz-ex-1
+              logical_node: np1101
+              pod_id: 1
+              node_id: 1101
+              router_id: 111.111.111.111
+              output_level: debug
+              state: present
+            register: reg5
 
-    scp /path/to/your/playbook.yml user@target:/path/to/destination
+          - name: Create a static route
+            cisco.aci.aci_l3out_static_routes: 
+              tenant: ansible_to_tf
+              pod_id: 1
+              node_id: 1101
+              prefix: 192.168.8.0/24
+              l3out: l3-dmz-ex-1
+              logical_node: np1101
+              output_level: debug
+              state: present
+            register: reg6
 
-3. Run the Playbook
--------------------
+          - name: Add a next hop
+            cisco.aci.aci_l3out_static_routes_nexthop:
+              tenant: ansible_to_tf
+              l3out: l3-dmz-ex-1
+              logical_node: np1101
+              node_id: 1101
+              pod_id: 1
+              prefix: 192.168.8.0/24
+              nexthop: 192.168.181.99
+              output_level: debug
+              state: present
+            register: reg7
 
-Finally, you can run your Ansible playbook:
+          - name: Include tasks to convert the play to TF config
+            ansible.builtin.include_tasks:
+              file: ansible_to_TF.yml
 
-.. code-block:: bash
+5. It's crucial to add the register keyword to all the tasks in the playbook. This is because the data stored in register will be parsed and used as input for the Terraform import function during the translation process.
+6. It's essential to append the ansible_to_TF.yml file to the playbook. This file contains the tasks that perform the translation process. By appending this file, you ensure that its tasks are executed after the main playbook tasks. This sequence is important because the translation tasks in ansible_to_TF.yml rely on the data generated by the main playbook tasks, which is stored using the register keyword. Without appending ansible_to_TF.yml, the translation tasks wouldn't be executed, and the translation process wouldn't take place. 
+7. After pasting the code into your **my_ACI_playbook.yml** file, save and close the file.
 
-    ansible-playbook /path/to/your/playbook.yml
+4. Starting the Translation by Running Our Playbook
+---------------------------------------------------
+
+1. Please use the keys **Ctrl-Alt-T** on your keyboard to open a terminal window or open it using the terminal icon on your desktop.
+2. Navigate to the **workshop/DEVWKS-2302/Module2** directory in your terminal by using the following command:
+
+    .. code-block:: bash
+
+       cd workshop/DEVWKS-2302/Module2
+3. Run the playbook using the `ansible-playbook` command followed by the playbook name and the inventory file. The `-i` option specifies the inventory file. Here is the command:
+
+    .. code-block:: bash
+
+       ansible-playbook my_ACI_playbook.yml -i inventory.networking -vvv
+
+4. Press Enter to start the execution. Ansible will now run your modified playbook using the specified inventory.
+5. Wait for the run to complete.
+
+5. The Translated Terraform Files
+---------------------------------
+
+1. Navigate to your **Module2** folder and you will see that a number of files of different formats were generated.
+2. Locate the **my_ACI_playbook** folder.
+3. As in Module 1, you will find the translated Terraform files in it.
+
+6. Modifying an ACI Tenant Annotation using Terraform Commands
+--------------------------------------------------------------
+1. Open a new terminal window using the **Ctrl-Alt-T** shortcut on your keyboard or by clicking on the terminal icon on your desktop.
+
+2. Navigate to the **workshop/DEVWKS-2302/Module2/my_ACI_playbook** directory using the cd command:
+
+   .. code-block:: bash
+
+     cd workshop/DEVWKS-2302/Module2/my_ACI_playbook
+
+3. Run the following command to initialize Terraform in your working directory:
+
+   .. code-block:: bash
+
+     terraform init
+
+4. Open the Terraform configuration file named **resources.tf**. Locate the resource block for **"aci_tenant" "translated_tenant_ansible_to_tf"** and find the **annotation** attribute. It should look like this:
+
+   .. code-block:: bash
+
+    resource "aci_tenant" "translated_tenant_ansible_to_tf" {
+      annotation                    = "orchestrator:ansible"
+      description                   = null
+      name                          = "ansible_to_tf"
+      name_alias                    = null
+      relation_fv_rs_tenant_mon_pol = null
+      relation_fv_rs_tn_deny_rule   = null
+    }
+
+5. Open your APIC URL in a web browser and sign back in using the credentials provided in the handout if you are logged out.
+
+6. Navigate to the **ansible_to_tf** tenant under the Tenants section. Check for the attached **Ansible** label. This label corresponds to the **annotation** value **"orchestrator:ansible"** in your Terraform file.
+
+  .. image:: /images/tenant_ansible.png
+
+7. Next, in the resource **"aci_tenant" "translated_tenant_ansible_to_tf"** block, change the annotation value to **"orchestrator:terraform"** in your Terraform file as seen below:
+
+  .. code-block:: bash
+
+    resource "aci_tenant" "translated_tenant_ansible_to_tf" {
+      annotation                    = "orchestrator:terraform"
+      description                   = null
+      name                          = "ansible_to_tf"
+      name_alias                    = null
+      relation_fv_rs_tenant_mon_pol = null
+      relation_fv_rs_tn_deny_rule   = null
+    }
+
+8. Verify your changes by running the terraform plan command.
+
+   .. code-block:: bash
+
+      terraform plan
+
+9. You'll see that the annotation will be updated from **"orchestrator:ansible"** to **"orchestrator:terraform"** for the **"aci_tenant" "translated_tenant_ansible_to_tf"** resource.
+
+   .. image:: /images/annotation_change.png
+
+10. To apply these changes to your actual infrastructure, run the terraform apply command:
+
+   .. code-block:: bash
+
+     terraform apply
+
+11. Finally, return to the APIC in your browser and navigate to the **ansible_to_tf** tenant. The **Terraform** label should now be attached to the Tenant, indicating a successful update of the annotation value.
+
+    .. image:: /images/tenant_terraform.png

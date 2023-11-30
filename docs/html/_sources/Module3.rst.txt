@@ -1,13 +1,16 @@
-============================
+=======
 Module3
-============================
+=======
 
 .. contents:: Table of Contents
 
 Introduction
 ============
 
-This guide will explain how to upload an Ansible playbook.
+pointers
+Rename - my_ACI_role.yaml to terraform.yml for target
+move variables under all(already done)
+zip the file! (archive in .zip format only)
 
 Requirements
 ============

@@ -1,0 +1,13 @@
+h1 {
+  font-size: 2.5em; /* adjust as needed */
+  margin-top: 10px;    /* add space above the title */
+  margin-bottom: 10px; /* add space below the title */
+}
+
+body {
+  font-size: 20px;
+}
+
+li {
+  margin-bottom: 15px;
+}

@@ -1,0 +1,23 @@
+============================
+Workshop Directory Structure
+============================
+
+Before you start with the modules, it is important to familiarize yourself with the structure of the working directory. Here is the directory structure for this workshop:
+
+.. code-block:: bash
+
+   workshop/
+   ├── DEVWKS-2302/
+   │   ├── Module1/
+   │   ├── Module2/
+   │   ├── Module3_optional/
+   │   └── translator/
+
+Each directory corresponds to a different part of the workshop:
+
+- **Module1**: This directory contains all the files needed for the first module of the workshop.
+- **Module2**: This directory contains all the files needed for the second module of the workshop.
+- **Module3_optional**: This directory contains all the files needed for the optional third module of the workshop.
+- **translator**: This directory contains the translator application used in the workshop.
+
+Please ensure that you are in the correct directory before starting each module or using the translator application.

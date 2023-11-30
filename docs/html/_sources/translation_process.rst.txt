@@ -1,7 +1,7 @@
 .. _translation_process:
 
-Important Note on the Translation Process
-=========================================
+Important Note
+==============
 
 - This translation process is specifically designed for **Application Centric Infrastructure (ACI)**.
 - It's important to note that this is **not a static translation**.

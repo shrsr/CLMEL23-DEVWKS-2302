@@ -4,129 +4,119 @@ Module 1
 
 .. contents:: Table of Contents
 
-1. Instructions for using the Translator Application
-----------------------------------------------------
+Instructions 
+============
 
-1. Open a web browser (Chrome) 
-2. Go to the URL http://localhost:5000
-3. If you **DO NOT** see the web application on your screen, please use the keys **Ctrl-Alt-T** on your keyboard to open a terminal window or open it using the terminal icon on your desktop. Then, copy and paste the following commands into the terminal and press Enter:
+1. Starting the Translator Application
+--------------------------------------
 
-   .. code-block:: bash
+1. Open a terminal window by pressing **Ctrl-Alt-T** on your keyboard or by clicking on the terminal icon on your desktop.
 
-      docker rm -fv $(docker ps -aq)
-      sudo lsof -i :5000 
-      sudo kill -9 <Enter PID>
-      docker-compose up
-
-4. Take a moment to hover over the various elements of the translator application. Tooltips will appear with useful information and guidance to help you utilize the application
-5. Please select **my_ACI_playbook.yml** which is in the **Module1** folder of the **DEVWKS-2302** directory
-6. The contents of the playbook are as follows:
-
-  .. code-block:: yaml
-
-    ---
-    - name: my_ACI_playbook
-      hosts: aci
-      gather_facts: no
-      tasks:
-
-        - name: Set vars
-          ansible.builtin.set_fact: 
-            aci_info: &aci_info
-              host: "{{ ansible_host }}"
-              username: "{{ ansible_user }}"
-              password: "{{ ansible_password }}"
-              validate_certs: '{{ validate_certs | default(false) }}'
-              use_ssl: '{{ use_ssl | default(true) }}'
-              output_level: debug
-
-        - name: Create a tenant
-          cisco.aci.aci_tenant:
-            <<: *aci_info 
-            tenant: ansible_to_tf
-            state: present
-
-        - name: Create a VRF
-          cisco.aci.aci_vrf: 
-            <<: *aci_info
-            tenant: ansible_to_tf
-            vrf: l3outtest
-            state: present
-
-        - name: Create an L3Out
-          cisco.aci.aci_l3out:
-            <<: *aci_info
-            tenant: ansible_to_tf
-            l3out: l3-dmz-ex-1
-            domain: l3outtest
-            vrf: l3outtest
-            route_control: export 
-            state: present
-
-        - name: Create a node profile
-          cisco.aci.aci_l3out_logical_node_profile: 
-            <<: *aci_info
-            tenant: ansible_to_tf
-            l3out: l3-dmz-ex-1
-            logical_node: np1101
-            state: present
-
-        - name: Add a node
-          cisco.aci.aci_l3out_logical_node:
-            <<: *aci_info
-            tenant: ansible_to_tf
-            l3out: l3-dmz-ex-1
-            logical_node: np1101
-            pod_id: 1
-            node_id: 1101
-            router_id: 111.111.111.111
-            state: present
-
-        - name: Create a static route
-          cisco.aci.aci_l3out_static_routes: 
-            <<: *aci_info
-            tenant: ansible_to_tf
-            pod_id: 1
-            node_id: 1101
-            prefix: 192.168.8.0/24
-            l3out: l3-dmz-ex-1
-            logical_node: np1101
-            state: present
-
-        - name: Add a next hop to the static route
-          cisco.aci.aci_l3out_static_routes_nexthop:
-            <<: *aci_info
-            tenant: ansible_to_tf
-            l3out: l3-dmz-ex-1
-            logical_node: np1101
-            node_id: 1101
-            pod_id: 1
-            prefix: 192.168.8.0/24
-            nexthop: 192.168.181.99
-            state: present
-
-6. Enter the APIC Host, APIC User ID and APIC Password prvoded in the handout
-7. Click **Translate** button
-8. After the translation is complete, click **Download Translated Files** button
-
-
-2. Instructions for verifying the downloaded Terraform files
-------------------------------------------------------------
-
-1. Use the keys **Ctrl-Alt-T** on your keyboard to open a terminal window or open it using the terminal icon on your desktop.
-2. Change the working directory to
-2. Go to the URL http://localhost:3000
-3. If you **DO NOT** see the web application on your screen, please use the keys **Ctrl-Alt-T** on your keyboard to open a terminal window or open it using the terminal icon on your desktop. Then, copy and paste the following commands into the terminal and press Enter:
+2. Navigate to the **workshop/DEVWKS-2302/translator** directory in your terminal by using the following command:
 
    .. code-block:: bash
 
-      docker rm -fv $(docker ps -aq)
-      sudo lsof -i :5000 
-      sudo kill -9 PID
+     cd workshop/DEVWKS-2302/translator
+
+3. Start the application using:
+
+   .. code-block:: bash
+
+     docker-compose up
+
+4. Navigate to the URL http://localhost:3000 in your open browser. You will see the application:
+
+  .. image:: /images/translator.png
+
+5. If you **Do Not** see the translator web application in the browser, copy and paste the following commands in the terminal and press Enter:
+
+   .. code-block:: bash
+
+      sudo systemctl start docker
+      docker-compose down -v --rmi all
+      sudo fuser -k 5000/tcp 3000/tcp
+      docker ps -q | xargs --no-run-if-empty docker stop
+      docker ps -a -q | xargs --no-run-if-empty docker rm
       docker-compose up
 
-4. Take a moment to hover over the various elements of the translator application. Tooltips will appear with useful information and guidance to help you utilize the application
-5. Please select **my_ACI_playbook.yml** which is in the **Module1** folder of the **DEVWKS-2302** directory
-6. Enter the APIC Host, APIC User ID and APIC Password in the handout
-7. Click **Translate** button
-8. After the translation is complete, click **Download Translated Files** button
+6. After you see the application window in the browser, take a moment to hover over the various elements of the translator application. Tooltips will appear with useful information and guidance to help you utilize the application.
+
+2. Open the Cisco APIC URL
+--------------------------
+
+1. Refer to the handout provided. Look for the Cisco APIC URL, which is the web address you'll use to access the Cisco Application Policy Infrastructure Controller (APIC).
+2. Open a new tab in your web browser, navigate to the APIC URL provided in the handout, and sign in using the username and password given.
+3. Keep this page open as you will be periodically checking it to see the configuration changes made throughout the workshop.
+
+3. Open The Playbook **my_ACI_playbook.yml**
+--------------------------------------------
+
+1. Find **my_ACI_playbook.yml** inside the **Module1** folder within the **workshop/DEVWKS-2302** directory and review the contents of the playbook, as the tasks within it will be translated to Terraform.
+
+4. Starting the Translation
+---------------------------
+
+1. Return to the web browser tab where you have the application open.
+2. In the application window, locate the drop-down menu. From there, select **my_ACI_playbook.yml** which resides in the **Module1** folder of the **workshop/DEVWKS-2302** directory.
+3. There is a checkbox labeled **DRY_RUN**. Leave this unchecked as we're going to apply the configuration in the playbook to the APIC for the first time.
+4. Provide the APIC's details. Refer to your handout for these, and enter the APIC Host (this is the APIC's IP address), APIC User ID, and APIC Password into the corresponding fields in the application window.
+5. Once you've entered these details, click the **Translate** button to start the translation process.
+6. Upon successful completion of the translation, a dialog box will confirm the same. Click the **Download Translated Files** button.
+7. Now, switch to the web browser tab where you have the APIC URL open. You should see that the configuration specified in the playbook has been successfully applied.
+
+  .. image:: /images/config.png
+
+5. The Translated Terraform Files
+---------------------------------
+
+1. Navigate to your Downloads folder and locate the **terraform_files.zip** file.
+2. Extract the files from the **terraform_files.zip** file.
+3. From the extracted files, open the Terraform file named **resources.tf**. This file is analogous to Ansible's **my_ACI_playbook.yml** and contains the desired state configuration.
+4. Open Terraform's **provider.tf**. This file is analogous to Ansible's inventory file.
+5. Also open Terraform's **terraform.tfstate** file. This file is a map of the configuration (pushed by Ansible from `my_ACI_playbook.yml`) that currently exists in your APIC. It represents the current state of your resources and serves as the source of truth. 
+6. Review these files to understand the current and desired states of your resources.
+
+6. Executing Terraform Commands
+-------------------------------
+
+1. Open a new terminal window. You can do this by using the **Ctrl-Alt-T** shortcut on your keyboard, or by clicking on the terminal icon on your desktop.
+
+2. Navigate to the directory where you have extracted your Terraform files. For instance, if you extracted the files in the `Downloads` folder, you can change to the directory by entering the following command in the terminal:
+
+   .. code-block:: bash
+
+      cd Downloads/terraform_files
+
+3. Initialize Terraform in your working directory with the following command:
+
+   .. code-block:: bash
+
+      terraform init
+
+   This command prepares your directory for other Terraform operations by downloading necessary provider plugins and creating backend data files.
+
+4. Check your Terraform configuration against your actual infrastructure in APIC using the plan command:
+
+   .. code-block:: bash
+
+      terraform plan
+
+   This command shows you what changes Terraform will make to reach the desired state defined in your configuration. Since your configuration already exists, you should see a message indicating that no changes are necessary.
+
+5. Apply your Terraform configuration to your actual infrastructure with the apply command:
+
+   .. code-block:: bash
+   
+      terraform apply
+
+   This command attempts to realize the desired state defined in your configuration. Since your configuration already matches the actual state, no changes will be made.
+
+6. Now, undo the configuration applied by Ansible. We can do this using the destroy command:
+
+   .. code-block:: bash
+   
+      terraform destroy
+
+   This command removes all resources that exist due to the current Terraform configuration. It effectively tears down the infrastructure that was built by Ansible.
+
+7. Finally, return to the APIC URL in your web browser. You should see that the configuration previously applied by Ansible no longer exists.
