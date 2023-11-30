@@ -35,7 +35,7 @@ Instructions
 1. Navigate to the **workshop/DEVWKS-2302/Module2** directory and open the **inventory.networking** file.
 2. Referring to your handout, fill the empty fields in the inventory.networking file. Enter the required information directly after the '=' sign without adding any space. Put the APIC Host (this is the APIC's IP address) for **ansible_host=**, the APIC User ID for **ansible_user=**, and the APIC Password for **ansible_password=**.
    Example:
-     .. image:: /images/inventory.png
+   .. image:: /images/inventory.png
 3. Leave the rest of the fields unchanged. Once you have entered the required information, you can save your changes and close the file.
 
 3. Open and Modify the Playbook **my_ACI_playbook.yml**
@@ -46,7 +46,7 @@ Instructions
 3. You'll need to modify each task by adding the **register** keyword and assigning a unique value to it. Please note that each task must have a unique value. For convenience, after step 4, you can copy the entire playbook provided below into your **my_ACI_playbook.yml** file. This version of the playbook already has the register keyword added to each task.
 4. Next, append the playbook called **ansible_to_TF.yml** to run after all the other tasks. In our case, this will become the eighth task in the playbook. For convenience, the eight task is already appended below.
 
-    .. code-block:: yml
+    .. code-block:: yaml
 
       ---
       - name: my_ACI_playbook
