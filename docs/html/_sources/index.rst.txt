@@ -13,11 +13,9 @@ An automated Ansible to Terraform translation for ACI
    :caption: Contents:
 
    Introduction
-   Important_note
    Workshop_directory_structure
    Module1
    Module2
-   Module3
 
 .. Indices and tables
 .. ==================

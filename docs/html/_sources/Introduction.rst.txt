@@ -4,12 +4,21 @@ Introduction
 
 Overview
 --------
-This guide is designed to walk you through the entire workshop in easy steps. The workshop is divided into three modules. Please note, the third module is optional and can be completed if time permits.
+This guide is designed to walk you through the entire workshop in easy steps. The workshop is divided into two modules.
 
 Modules
 -------
-* **Module 1:** Translate **my_ACI_playbook.yml** using the translator application. In this module, you will be guided through the process of translating a playbook using the translator web application.
+* **Module 1:** In this module, you will be guided through the process of translating a playbook using the translator web application.
 
-* **Module 2:** Manually translate **my_ACI_playbook.yml**. This module involves manually translating the same playbook, replicating the steps from Module 1. This allows you to gain a deeper understanding of the application's backend processes.
+* **Module 2:** This module involves manually translating the same playbook, replicating the steps from Module 1. This allows you to gain a deeper understanding of the application's backend processes.
 
-* **Module 3 (Optional):** Translate **my_ACI_role** using the translator application. This optional module guides you through the process of translating an entire Ansible ACI role using the translator web application.
+Important Notes
+---------------
+
+* This translation process is specifically designed for **Application Centric Infrastructure (ACI)**.
+
+* It's important to note that this is **not a static translation**. The process does not directly convert an Ansible playbook (written in YAML - YAML Ain't Markup Language) into a Terraform configuration file (written in HCL - HashiCorp Configuration Language).
+
+* For the translation to complete, the selected playbook will be run by Ansible and will interact with the provided Application Policy Infrastructure Controller (APIC). After this, Terraform will import the configuration that has been applied.
+
+* At a minimum, this process requires an APIC simulator.

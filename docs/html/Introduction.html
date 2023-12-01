@@ -14,7 +14,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Important Note" href="Important_note.html" />
+    <link rel="next" title="Workshop Directory" href="Workshop_directory_structure.html" />
     <link rel="prev" title="Welcome to DEVWKS-2302" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -36,14 +36,22 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>This guide is designed to walk you through the entire workshop in easy steps. The workshop is divided into three modules. Please note, the third module is optional and can be completed if time permits.</p>
+<p>This guide is designed to walk you through the entire workshop in easy steps. The workshop is divided into two modules.</p>
 </section>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Module 1:</strong> Translate <strong>my_ACI_playbook.yml</strong> using the translator application. In this module, you will be guided through the process of translating a playbook using the translator web application.</p></li>
-<li><p><strong>Module 2:</strong> Manually translate <strong>my_ACI_playbook.yml</strong>. This module involves manually translating the same playbook, replicating the steps from Module 1. This allows you to gain a deeper understanding of the application's backend processes.</p></li>
-<li><p><strong>Module 3 (Optional):</strong> Translate <strong>my_ACI_role</strong> using the translator application. This optional module guides you through the process of translating an entire Ansible ACI role using the translator web application.</p></li>
+<li><p><strong>Module 1:</strong> In this module, you will be guided through the process of translating a playbook using the translator web application.</p></li>
+<li><p><strong>Module 2:</strong> This module involves manually translating the same playbook, replicating the steps from Module 1. This allows you to gain a deeper understanding of the application's backend processes.</p></li>
+</ul>
+</section>
+<section id="important-notes">
+<h2>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>This translation process is specifically designed for <strong>Application Centric Infrastructure (ACI)</strong>.</p></li>
+<li><p>It's important to note that this is <strong>not a static translation</strong>. The process does not directly convert an Ansible playbook (written in YAML - YAML Ain't Markup Language) into a Terraform configuration file (written in HCL - HashiCorp Configuration Language).</p></li>
+<li><p>For the translation to complete, the selected playbook will be run by Ansible and will interact with the provided Application Policy Infrastructure Controller (APIC). After this, Terraform will import the configuration that has been applied.</p></li>
+<li><p>At a minimum, this process requires an APIC simulator.</p></li>
 </ul>
 </section>
 </section>
@@ -70,13 +78,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-notes">Important Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Important_note.html">Important Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Workshop_directory.html">Workshop Directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Workshop_directory_structure.html">Workshop Directory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Module1.html">Module 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Module2.html">Module 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Module3.html">Module3</a></li>
 </ul>
 
 <div class="relations">
@@ -84,7 +91,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to DEVWKS-2302</a></li>
-      <li>Next: <a href="Important_note.html" title="next chapter">Important Note</a></li>
+      <li>Next: <a href="Workshop_directory_structure.html" title="next chapter">Workshop Directory</a></li>
   </ul></li>
 </ul>
 </div>

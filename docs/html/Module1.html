@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Module 2" href="Module2.html" />
-    <link rel="prev" title="Workshop Directory" href="Workshop_directory.html" />
+    <link rel="prev" title="Workshop Directory" href="Workshop_directory_structure.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -43,7 +43,7 @@
 <ul>
 <li><p><a class="reference internal" href="#starting-the-translator-application" id="id3">1. Starting the Translator Application</a></p></li>
 <li><p><a class="reference internal" href="#open-the-cisco-apic-url" id="id4">2. Open the Cisco APIC URL</a></p></li>
-<li><p><a class="reference internal" href="#open-the-playbook-my-aci-playbook-yml" id="id5">3. Open The Playbook <strong>my_ACI_playbook.yml</strong></a></p></li>
+<li><p><a class="reference internal" href="#open-the-playbook-my-aci-playbook-yml" id="id5">3. Open the Playbook <strong>my_ACI_playbook.yml</strong></a></p></li>
 <li><p><a class="reference internal" href="#starting-the-translation" id="id6">4. Starting the Translation</a></p></li>
 <li><p><a class="reference internal" href="#the-translated-terraform-files" id="id7">5. The Translated Terraform Files</a></p></li>
 <li><p><a class="reference internal" href="#executing-terraform-commands" id="id8">6. Executing Terraform Commands</a></p></li>
@@ -97,7 +97,7 @@ docker-compose<span class="w"> </span>up
 </ol>
 </section>
 <section id="open-the-playbook-my-aci-playbook-yml">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">3. Open The Playbook <strong>my_ACI_playbook.yml</strong></a><a class="headerlink" href="#open-the-playbook-my-aci-playbook-yml" title="Link to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">3. Open the Playbook <strong>my_ACI_playbook.yml</strong></a><a class="headerlink" href="#open-the-playbook-my-aci-playbook-yml" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Find <strong>my_ACI_playbook.yml</strong> inside the <strong>Module1</strong> folder within the <strong>workshop/DEVWKS-2302</strong> directory and review the contents of the playbook, as the tasks within it will be translated to Terraform.</p></li>
 </ol>
@@ -107,7 +107,9 @@ docker-compose<span class="w"> </span>up
 <ol class="arabic simple">
 <li><p>Return to the web browser tab where you have the application open.</p></li>
 <li><p>In the application window, locate the drop-down menu. From there, select <strong>my_ACI_playbook.yml</strong> which resides in the <strong>Module1</strong> folder of the <strong>workshop/DEVWKS-2302</strong> directory.</p></li>
-<li><p>There is a checkbox labeled <strong>DRY_RUN</strong>. Leave this unchecked as we're going to apply the configuration in the playbook to the APIC for the first time.</p></li>
+<li><p>There is a checkbox labeled <strong>DRY-RUN</strong>. Leave this unchecked as we're going to apply the configuration in the playbook to the APIC for the first time.</p></li>
+<li><p>If you're planning to translate a playbook that has previously been applied to an APIC into Terraform configuration, and you're uncertain whether it might cause any unintended changes, the <strong>DRY-RUN</strong> mode can be particularly useful. By running the playbook in <strong>DRY-RUN</strong> mode, which functions as a check mode, you can safely simulate the actions of the playbook without making any actual changes to the APIC.</p></li>
+<li><p>Please note, if you select the <strong>DRY-RUN</strong> mode and the playbook's configuration has <strong>not</strong> been previously applied to the APIC, the translation process will not be successful. This is because the <strong>DRY-RUN</strong> mode requires existing configurations on the APIC for Terraform to import. Without a pre-existing configuration, there's nothing for Terraform to import, and consequently, the translation cannot occur.</p></li>
 <li><p>Provide the APIC's details. Refer to your handout for these, and enter the APIC Host (this is the APIC's IP address), APIC User ID, and APIC Password into the corresponding fields in the application window.</p></li>
 <li><p>Once you've entered these details, click the <strong>Translate</strong> button to start the translation process.</p></li>
 <li><p>Upon successful completion of the translation, a dialog box will confirm the same. Click the <strong>Download Translated Files</strong> button.</p></li>
@@ -187,21 +189,19 @@ docker-compose<span class="w"> </span>up
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Important_note.html">Important Note</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Workshop_directory.html">Workshop Directory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Workshop_directory_structure.html">Workshop Directory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Module 1</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#instructions">Instructions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Module2.html">Module 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Module3.html">Module3</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Workshop_directory.html" title="previous chapter">Workshop Directory</a></li>
+      <li>Previous: <a href="Workshop_directory_structure.html" title="previous chapter">Workshop Directory</a></li>
       <li>Next: <a href="Module2.html" title="next chapter">Module 2</a></li>
   </ul></li>
 </ul>
