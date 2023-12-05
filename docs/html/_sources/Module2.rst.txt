@@ -57,7 +57,7 @@ Instructions
         tasks:
           - name: Create a tenant
             cisco.aci.aci_tenant: 
-              tenant: ansible_to_tf
+              tenant: pod_<your_pod_number>
               output_level: debug
               state: present
             register: reg1
