@@ -109,7 +109,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configure a VRF</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_vrf</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">vrf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
 <span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
 <span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
@@ -117,7 +117,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create an L3Out</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_l3out</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
 <span class="w">        </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
 <span class="w">        </span><span class="nt">vrf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
@@ -128,7 +128,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a node profile</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_l3out_logical_node_profile</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
 <span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
 <span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
@@ -137,7 +137,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a node</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_l3out_logical_node</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
 <span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
 <span class="w">        </span><span class="nt">pod_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
@@ -149,7 +149,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a static route</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_l3out_static_routes</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">pod_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <span class="w">        </span><span class="nt">node_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1101</span>
 <span class="w">        </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.8.0/24</span>
@@ -161,7 +161,7 @@
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a next hop</span>
 <span class="w">      </span><span class="nt">cisco.aci.aci_l3out_static_routes_nexthop</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_tf</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span>
 <span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
 <span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
 <span class="w">        </span><span class="nt">node_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1101</span>
@@ -181,13 +181,87 @@
 </li>
 <li><p>It's crucial to add the <strong>register</strong> keyword followed by a unique identifier to all the tasks in the playbook. This is because the data stored in register will be parsed and used as input for the Terraform import function during the translation process.</p></li>
 <li><p>It's essential to include the <strong>ansible_to_TF.yml</strong> file in the playbook. This file contains the tasks that perform the translation process. By including this file, you ensure that its tasks are executed after the main playbook tasks. This sequence is important because the translation tasks in <strong>ansible_to_TF.yml</strong> rely on the data generated by the main playbook tasks, which is stored using the <strong>register</strong> keyword. Without including <strong>ansible_to_TF.yml</strong>, the translation tasks wouldn't be executed, and the translation process wouldn't take place.</p></li>
-<li><p>After pasting the code into your <strong>my_ACI_playbook.yml</strong> file, please ensure that your tenant name matches the pod number provided beside your laptop.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a tenant</span>
-<span class="w">  </span><span class="nt">cisco.aci.aci_tenant</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
-<span class="w">    </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
-<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
-<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg1</span>
+<li><p>After pasting the code into your <strong>my_ACI_playbook.yml</strong> file, please ensure that your tenant names in <strong>all the tasks</strong> matches the pod number provided beside your laptop.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_ACI_playbook</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aci</span>
+<span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a tenant</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_tenant</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg1</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Configure a VRF</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_vrf</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">vrf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg2</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create an L3Out</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_l3out</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
+<span class="w">        </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
+<span class="w">        </span><span class="nt">vrf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3outtest</span>
+<span class="w">        </span><span class="nt">route_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">export</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg3</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a node profile</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_l3out_logical_node_profile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
+<span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg4</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a node</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_l3out_logical_node</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
+<span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
+<span class="w">        </span><span class="nt">pod_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">        </span><span class="nt">node_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1101</span>
+<span class="w">        </span><span class="nt">router_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">111.111.111.111</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg5</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a static route</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_l3out_static_routes</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">pod_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">        </span><span class="nt">node_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1101</span>
+<span class="w">        </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.8.0/24</span>
+<span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
+<span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg6</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Add a next hop</span>
+<span class="w">      </span><span class="nt">cisco.aci.aci_l3out_static_routes_nexthop</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
+<span class="w">        </span><span class="nt">l3out</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">l3-dmz-ex-1</span>
+<span class="w">        </span><span class="nt">logical_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np1101</span>
+<span class="w">        </span><span class="nt">node_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1101</span>
+<span class="w">        </span><span class="nt">pod_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">        </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.8.0/24</span>
+<span class="w">        </span><span class="nt">nexthop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.181.99</span>
+<span class="w">        </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg7</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Include tasks to convert the play to TF config</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_tasks</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible_to_TF.yml</span>
 </pre></div>
 </div>
 </li>

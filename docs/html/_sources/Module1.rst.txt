@@ -52,15 +52,90 @@ Instructions
 ------------------------------------------------------------------------
 
 1. Find **my_ACI_playbook.yml** inside the **Module1** folder within the **workshop/DEVWKS-2302** directory and review the contents of the playbook, as the tasks within it will be translated to Terraform.
-2. As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Please ensure that your tenant name matches the pod number provided beside your laptop.
+2. As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Please ensure that your tenant names in **all the tasks** of the playbook matches the pod number provided beside your laptop.
 
     .. code-block:: yaml
 
-        - name: Create a tenant
-          cisco.aci.aci_tenant: 
-            tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
-            output_level: debug
-            state: present
+         ---
+         - name: my_ACI_playbook
+            hosts: aci
+            gather_facts: no
+            tasks:
+            - name: Set vars
+               ansible.builtin.set_fact: 
+                  aci_info: &aci_info
+                  host: "{{ host }}"
+                  username: "{{ ansible_user }}"
+                  password: "{{ ansible_password }}"
+                  validate_certs: '{{ validate_certs | default(false) }}'
+                  use_ssl: '{{ use_ssl | default(true) }}'
+                  output_level: debug
+         
+            - name: Create a tenant
+               cisco.aci.aci_tenant:
+                  <<: *aci_info 
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  state: present
+         
+            - name: Configure a VRF
+               cisco.aci.aci_vrf: 
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  vrf: l3outtest
+                  state: present
+         
+            - name: Create an L3Out
+               cisco.aci.aci_l3out:
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  l3out: l3-dmz-ex-1
+                  domain: l3outtest
+                  vrf: l3outtest
+                  route_control: export 
+                  state: present
+         
+            - name: Create a node profile
+               cisco.aci.aci_l3out_logical_node_profile: 
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  l3out: l3-dmz-ex-1
+                  logical_node: np1101
+                  state: present
+         
+            - name: Add a node
+               cisco.aci.aci_l3out_logical_node:
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  l3out: l3-dmz-ex-1
+                  logical_node: np1101
+                  pod_id: 1
+                  node_id: 1101
+                  router_id: 111.111.111.111
+                  state: present
+         
+            - name: Create a static route
+               cisco.aci.aci_l3out_static_routes: 
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  pod_id: 1
+                  node_id: 1101
+                  prefix: 192.168.8.0/24
+                  l3out: l3-dmz-ex-1
+                  logical_node: np1101
+                  state: present
+         
+            - name: Add a next hop
+               cisco.aci.aci_l3out_static_routes_nexthop:
+                  <<: *aci_info
+                  tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
+                  l3out: l3-dmz-ex-1
+                  logical_node: np1101
+                  node_id: 1101
+                  pod_id: 1
+                  prefix: 192.168.8.0/24
+                  nexthop: 192.168.181.99
+                  state: present
+    
 
 4. Starting the Translation
 ---------------------------
