@@ -100,14 +100,13 @@ docker-compose<span class="w"> </span>up
 <h3><a class="toc-backref" href="#id5" role="doc-backlink">3. Open the Playbook <strong>my_ACI_playbook.yml</strong> and Personalize Your Tenant</a><a class="headerlink" href="#open-the-playbook-my-aci-playbook-yml-and-personalize-your-tenant" title="Link to this heading">¶</a></h3>
 <ol class="arabic">
 <li><p>Find <strong>my_ACI_playbook.yml</strong> inside the <strong>Module1</strong> folder within the <strong>workshop/DEVWKS-2302</strong> directory and review the contents of the playbook, as the tasks within it will be translated to Terraform.</p></li>
-<li><p>As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Replace <strong>ansible_to_tf</strong> with your <strong>first name</strong> in the <strong>my_aci_playbook.yml</strong> file. This ensures your work won't conflict with others and helps you easily identify your resources.</p>
+<li><p>As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Please ensure that your tenant name matches the pod number provided beside your laptop.</p>
 <blockquote>
 <div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create a tenant</span>
 <span class="w">  </span><span class="nt">cisco.aci.aci_tenant</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_first_name&gt;</span><span class="w">  </span><span class="c1"># Replace &lt;your_first_name&gt; with your actual first name</span>
+<span class="w">    </span><span class="nt">tenant</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pod_&lt;your_pod_number&gt;</span><span class="w">  </span><span class="c1"># &lt;your_pod_number&gt; should reflect your pod number beside your laptop</span>
 <span class="w">    </span><span class="nt">output_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span>
 <span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
-<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reg1</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -125,7 +124,7 @@ docker-compose<span class="w"> </span>up
 <li><p>Provide the APIC's details. Refer to your handout for these, and enter the APIC Host (this is the APIC's IP address), APIC User ID, and APIC Password into the corresponding fields in the application window.</p></li>
 <li><p>Once you've entered these details, click the <strong>Translate</strong> button to start the translation process.</p></li>
 <li><p>Upon successful completion of the translation, a dialog box will confirm the same. Click the <strong>Download Translated Files</strong> button.</p></li>
-<li><p>Now, switch to the web browser tab where you have the APIC URL open. You should see that the configuration specified in the playbook has been successfully applied.</p></li>
+<li><p>Now, switch to the web browser tab where you have the APIC URL open. You should see that the configuration specified in the playbook has been successfully applied to your tenant, which should correspond to your respective pod number.</p></li>
 </ol>
 <blockquote>
 <div><img alt="_images/config.png" src="_images/config.png" />
@@ -135,7 +134,7 @@ docker-compose<span class="w"> </span>up
 <h3><a class="toc-backref" href="#id7" role="doc-backlink">5. The Translated Terraform Files</a><a class="headerlink" href="#the-translated-terraform-files" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Navigate to your Downloads folder and locate the <strong>terraform_files.zip</strong> file.</p></li>
-<li><p>Extract the files from the <strong>terraform_files.zip</strong> file.</p></li>
+<li><p>Right-click on the <strong>terraform_files.zip</strong> file and select &quot;Extract Here&quot; to unpack the files.</p></li>
 <li><p>From the extracted files, open the Terraform file named <strong>resources.tf</strong>. This file is analogous to Ansible's <strong>my_ACI_playbook.yml</strong> and contains the desired state configuration.</p></li>
 <li><p>Open Terraform's <strong>provider.tf</strong>. This file is analogous to Ansible's inventory file.</p></li>
 <li><p>Also open Terraform's <strong>terraform.tfstate</strong> file. This file is a map of the configuration (pushed by Ansible from <cite>my_ACI_playbook.yml</cite>) that currently exists in your APIC. It represents the current state of your resources and serves as the source of truth.</p></li>

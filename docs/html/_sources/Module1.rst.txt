@@ -52,16 +52,15 @@ Instructions
 ------------------------------------------------------------------------
 
 1. Find **my_ACI_playbook.yml** inside the **Module1** folder within the **workshop/DEVWKS-2302** directory and review the contents of the playbook, as the tasks within it will be translated to Terraform.
-2. As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Replace **ansible_to_tf** with your **first name** in the **my_aci_playbook.yml** file. This ensures your work won't conflict with others and helps you easily identify your resources.
+2. As the participants are sharing APICs for this workshop, it's crucial to use unique tenant names. Please ensure that your tenant name matches the pod number provided beside your laptop.
 
     .. code-block:: yaml
 
         - name: Create a tenant
           cisco.aci.aci_tenant: 
-            tenant: <your_first_name>  # Replace <your_first_name> with your actual first name
+            tenant: pod_<your_pod_number>  # <your_pod_number> should reflect your pod number beside your laptop
             output_level: debug
             state: present
-          register: reg1
 
 4. Starting the Translation
 ---------------------------
@@ -74,7 +73,7 @@ Instructions
 6. Provide the APIC's details. Refer to your handout for these, and enter the APIC Host (this is the APIC's IP address), APIC User ID, and APIC Password into the corresponding fields in the application window.
 7. Once you've entered these details, click the **Translate** button to start the translation process.
 8. Upon successful completion of the translation, a dialog box will confirm the same. Click the **Download Translated Files** button.
-9. Now, switch to the web browser tab where you have the APIC URL open. You should see that the configuration specified in the playbook has been successfully applied.
+9. Now, switch to the web browser tab where you have the APIC URL open. You should see that the configuration specified in the playbook has been successfully applied to your tenant, which should correspond to your respective pod number.
 
   .. image:: /images/config.png
 
@@ -82,7 +81,7 @@ Instructions
 ---------------------------------
 
 1. Navigate to your Downloads folder and locate the **terraform_files.zip** file.
-2. Extract the files from the **terraform_files.zip** file.
+2. Right-click on the **terraform_files.zip** file and select "Extract Here" to unpack the files.
 3. From the extracted files, open the Terraform file named **resources.tf**. This file is analogous to Ansible's **my_ACI_playbook.yml** and contains the desired state configuration.
 4. Open Terraform's **provider.tf**. This file is analogous to Ansible's inventory file.
 5. Also open Terraform's **terraform.tfstate** file. This file is a map of the configuration (pushed by Ansible from `my_ACI_playbook.yml`) that currently exists in your APIC. It represents the current state of your resources and serves as the source of truth. 
