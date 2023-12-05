@@ -193,7 +193,7 @@ Instructions
 
    .. code-block:: bash
    
-      terraform apply
+      terraform apply -auto-approve
 
    This command attempts to realize the desired state defined in your configuration. Since your configuration already matches the actual state, no changes will be made.
 

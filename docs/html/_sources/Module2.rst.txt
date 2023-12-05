@@ -305,7 +305,7 @@ Instructions
 
    .. code-block:: bash
 
-     terraform apply
+     terraform apply -auto-approve
 
 11. Finally, return to the APIC in your browser and navigate to the **ansible_to_tf** tenant. The **Terraform** label should now be attached to the Tenant, indicating a successful update of the annotation value.
 
